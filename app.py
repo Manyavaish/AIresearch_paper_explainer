@@ -33,20 +33,25 @@ if uploaded_file:
 
     # ✅ Use Groq model (Mixtral)
     llm = ChatGroq(model="mixtral-8x7b-32768", temperature=0.3)
-    qa = RetrievalQA.from_chain_type(llm=llm, retriever=db.as_retriever())
-
+    retriever = db.as_retriever(search_kwargs={"k": 5})  # limit chunks
+    qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
+    
     st.success("✅ Paper processed!")
-
+    
     if st.button("Generate Blog Summary"):
-        st.subheader("🧩 Problem Statement")
-        st.write(qa.run("What problem does this paper solve? Explain simply."))
-
-        st.subheader("🛠️ Methodology")
-        st.write(qa.run("Explain the methodology in simple terms."))
-
-        st.subheader("🌟 Key Takeaways")
-        st.write(qa.run("Summarize the results in 3-5 bullet points."))
-
-        st.subheader("🧠 Conclusion")
-        st.write(qa.run("Summarize the conclusion in a blog-style."))
+        try:
+            st.subheader("🧩 Problem Statement")
+            st.write(qa.run("What problem does this paper solve? Explain simply."))
+    
+            st.subheader("🛠️ Methodology")
+            st.write(qa.run("Explain the methodology in simple terms."))
+    
+            st.subheader("🌟 Key Takeaways")
+            st.write(qa.run("Summarize the results in 3-5 bullet points."))
+    
+            st.subheader("🧠 Conclusion")
+            st.write(qa.run("Summarize the conclusion in a blog-style."))
+        except Exception as e:
+            st.error("❌ Something went wrong while generating the summary.")
+            st.exception(e)
 
