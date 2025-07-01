@@ -1,7 +1,7 @@
 streamlit
 langchain
+langchain-community
 faiss-cpu
 sentence-transformers
 langchain-google-vertexai
 PyPDF2
-
