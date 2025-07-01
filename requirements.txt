@@ -3,5 +3,6 @@ langchain
 langchain-community
 faiss-cpu
 sentence-transformers
+openai
 pypdf
 PyPDF2
