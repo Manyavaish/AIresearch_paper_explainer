@@ -3,5 +3,5 @@ langchain
 langchain-community
 faiss-cpu
 sentence-transformers
-langchain-google-vertexai
+pypdf
 PyPDF2
