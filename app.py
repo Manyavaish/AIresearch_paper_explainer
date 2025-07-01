@@ -31,8 +31,9 @@ if uploaded_file:
     embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     db = FAISS.from_documents(chunks, embedding)
 
-    # ✅ Use Groq model (Mixtral)
-    llm = ChatGroq(model="mixtral-8x7b-32768", temperature=0.3)
+    
+    llm = ChatGroq(model="llama3-70b-8192", temperature=0.3)
+
     retriever = db.as_retriever(search_kwargs={"k": 5})  # limit chunks
     qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
     
