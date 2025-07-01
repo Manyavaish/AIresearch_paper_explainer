@@ -5,7 +5,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
-from langchain_google_vertexai import ChatVertexAI
+
 
 st.set_page_config(page_title="AI Research Paper Explainer", layout="centered")
 st.title("📘 AI Research Paper Explainer")
