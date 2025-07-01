@@ -1,11 +1,15 @@
 import streamlit as st
 import tempfile
-from langchain_community.document_loaders import PyPDFLoader  # ✅ fixed here
+import os
+from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
+from langchain_groq import ChatGroq  # ✅ Use Groq instead of Gemini
 
+# Load Groq API key from Streamlit secrets
+os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
 st.set_page_config(page_title="AI Research Paper Explainer", layout="centered")
 st.title("📘 AI Research Paper Explainer")
@@ -27,7 +31,8 @@ if uploaded_file:
     embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     db = FAISS.from_documents(chunks, embedding)
 
-    llm = ChatVertexAI(model_name="gemini-1.5-pro", temperature=0.3)
+    # ✅ Use Groq model (Mixtral)
+    llm = ChatGroq(model="mixtral-8x7b-32768", temperature=0.3)
     qa = RetrievalQA.from_chain_type(llm=llm, retriever=db.as_retriever())
 
     st.success("✅ Paper processed!")
@@ -44,3 +49,4 @@ if uploaded_file:
 
         st.subheader("🧠 Conclusion")
         st.write(qa.run("Summarize the conclusion in a blog-style."))
+
