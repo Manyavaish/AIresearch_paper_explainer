@@ -14,7 +14,7 @@ os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 st.set_page_config(page_title="Make It Asaan", layout="centered")
 
 st.markdown("<h1 style='text-align: center; color: #4A90E2;'>📘 Make It Asaan</h1>", unsafe_allow_html=True)
-st.markdown("<h4 style='text-align: center; color: gray;'>Simplifying research papers and PDF'S using AI ✨</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: gray;'>✨ Simplifying research papers and PDF'S using AI ✨</h4>", unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader("Upload your research paper (PDF)", type=["pdf"])
 
