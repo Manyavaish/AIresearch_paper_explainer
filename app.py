@@ -12,7 +12,7 @@ from langchain_groq import ChatGroq  # ✅ Use Groq instead of Gemini
 os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
 st.set_page_config(page_title="AI Research Paper Explainer", layout="centered")
-st.title("📘 AI Research Paper Explainer")
+st.title("📘 Make It Asaan")
 
 uploaded_file = st.file_uploader("Upload your research paper (PDF)", type=["pdf"])
 
