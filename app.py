@@ -42,7 +42,8 @@ if uploaded_file:
     llm = ChatGroq(model="llama3-70b-8192", temperature=0.3)
 
     # 4️⃣ Build retrieval chain manually (Runnable API)
-    from langchain.prompts import PromptTemplate
+    from langchain_core.prompts import PromptTemplate
+
     template = """Use the following retrieved context to answer the question clearly and simply.
 
     Context:
