@@ -2,13 +2,12 @@ import streamlit as st
 import tempfile
 import os
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
-from langchain_groq import ChatGroq  # ✅ Use Groq instead of Gemini
+from langchain_groq import ChatGroq  
 
-# Load Groq API key from Streamlit secrets
 os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
 st.set_page_config(page_title="Make It Asaan", layout="centered")
@@ -36,7 +35,7 @@ if uploaded_file:
     
     llm = ChatGroq(model="llama3-70b-8192", temperature=0.3)
 
-    retriever = db.as_retriever(search_kwargs={"k": 5})  # limit chunks
+    retriever = db.as_retriever(search_kwargs={"k": 5})  
     qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
     
     st.success("✅ Paper processed!")
